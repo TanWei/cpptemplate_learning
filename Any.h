@@ -14,6 +14,26 @@ public:
     template<class U, 
         class = typename std::enable_if<!is_same<typename std::decay<U>::type, any>::value,U>::type>
     any(U&& value) : m_ptr(new derived<typename decay<U>::type>(forward<U>(value))), m_tpIdx(type_index(typeid(typename decay<U>::type))) {}
+    
+    // template<class U >
+	// U& AnyCast()
+	// {
+	// 	if (!Is<U>())
+	// 	{
+    //         throw std::bad_cast();
+	// 	}
+	// 	auto dd = dynamic_cast<derived<U>*> (m_ptr.get());
+	// 	return dd->m_value;
+	// }
+
+    template<class U >
+    U& fCast()
+    {
+        // warning :
+        // @todo : reinterpret_cast<> == static_cast<> ;
+        auto  dd = reinterpret_cast< derived<U>* >(m_ptr.get());
+        return dd->m_value;
+    }
 private:
     class base;
     using basePtr = std::unique_ptr<base>;

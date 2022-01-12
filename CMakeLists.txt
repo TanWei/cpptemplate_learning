@@ -6,6 +6,6 @@ cmake_minimum_required (VERSION 3.8)
 project ("cpptemplate_learning")
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (cpptemplate_learning "main.cpp")
+add_executable (cpptemplate_learning "main.cpp" "FunctionStorage.cpp")
 
 # TODO: 如有需要，请添加测试并安装目标。
